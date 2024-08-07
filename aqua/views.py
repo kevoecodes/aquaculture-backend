@@ -83,8 +83,12 @@ class DeviceReadingsView(APIView):
         if serializer.is_valid():
             reading = serializer.save()
             PostToReadingChannel(ReadingSerializer(instance=reading).data)
-            if reading.temperature > 40 or reading.temperature < 16:
-                message = f"Temperature {reading.temperature} C is out of range"
+            message = ''
+            if reading.temperature > 28 or reading.temperature < 24:
+                message += f"Temp: {reading.temperature}C - (OP)\n"
+            if reading.ph < 5.5 or reading.ph > 8.5:
+                message += f"PH: {reading.ph} - (OP)"
+            if len(message) > 0:
                 send_sms('255624351398', message)
             return Response({
                 'status': True,
