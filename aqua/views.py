@@ -41,6 +41,7 @@ class LoginView(APIView):
 
 
 class DeviceReadingsView(APIView):
+    permission_classes = [AllowAny]
 
     def get(self, request):
         device_no = self.request.GET.get('device_no')
