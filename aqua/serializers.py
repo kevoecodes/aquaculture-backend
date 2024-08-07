@@ -30,7 +30,7 @@ class ReadingPostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reading
-        fields = ('ammonia', 'temperature', 'turbidity', 'dissolved_oxygen', 'device')
+        fields = ('ammonia', 'temperature', 'turbidity', 'dissolved_oxygen', 'device', 'ph')
 
 
 class ReadingSerializer(serializers.ModelSerializer):
@@ -38,7 +38,7 @@ class ReadingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reading
-        fields = ('id', 'ammonia', 'created_at', 'temperature', 'turbidity', 'dissolved_oxygen', 'device_no')
+        fields = ('id', 'ammonia', 'created_at', 'temperature', 'turbidity', 'dissolved_oxygen', 'device_no', 'ph')
 
     @staticmethod
     def get_device_no(device):

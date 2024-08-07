@@ -68,6 +68,7 @@ class DeviceReadingsView(APIView):
                     'temperature': 0,
                     'ammonia': 0,
                     'turbidity': 0,
+                    'ph': 0,
                     'dissolved_oxygen': 0
                 }
             })

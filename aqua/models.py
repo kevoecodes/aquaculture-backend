@@ -11,6 +11,7 @@ class Device(models.Model):
 class Reading(models.Model):
 
     temperature = models.FloatField()
+    ph = models.FloatField()
     turbidity = models.FloatField()
     ammonia = models.FloatField()
     dissolved_oxygen = models.FloatField()
