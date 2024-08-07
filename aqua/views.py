@@ -4,8 +4,9 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from aqua.models import Reading
-from aqua.serializers import LoginSerializer, UserSerializer, ReadingSerializer, ReadingPostSerializer
+from aqua.models import Reading, Device
+from aqua.serializers import LoginSerializer, UserSerializer, ReadingSerializer, ReadingPostSerializer, \
+    UserDeviceSerializer
 from aqua.sms import send_sms
 from aqua.socket.managers import PostToReadingChannel
 
@@ -40,13 +41,21 @@ class LoginView(APIView):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+class DevicesView(APIView):
+    permission_classes = [AllowAny]
+
+    @staticmethod
+    def get(request):
+        return Response({'success': True, 'devices': UserDeviceSerializer(instance=Device.objects.all()).data})
+
+
 class DeviceReadingsView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request):
         device_no = self.request.GET.get('device_no')
         if device_no is not None:
-            readings = Reading.objects.filter(device_no=device_no).order_by('-created_at')
+            readings = Reading.objects.filter(device__device_no=device_no).order_by('-created_at')
             if readings.count() > 0:
                 return Response({
                     'status': True,
@@ -62,6 +71,7 @@ class DeviceReadingsView(APIView):
                     'dissolved_oxygen': 0
                 }
             })
+
         return Response({
             'status': False,
             'message': 'Device not found'

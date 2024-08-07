@@ -43,3 +43,10 @@ class ReadingSerializer(serializers.ModelSerializer):
     @staticmethod
     def get_device_no(device):
         return device.device.device_no
+
+
+class UserDeviceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = UserDevice
+        fields = '__all__'
