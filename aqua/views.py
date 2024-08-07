@@ -90,7 +90,8 @@ class DeviceReadingsView(APIView):
             if reading.ph < 5.5 or reading.ph > 8.5:
                 message += f"PH: {reading.ph} - (OP)"
             if len(message) > 0:
-                send_sms('255624351398', message)
+                pass
+                # send_sms('255624351398', message)
             return Response({
                 'status': True,
             })
