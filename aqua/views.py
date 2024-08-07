@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from aqua.models import Reading, Device
+from aqua.models import Reading, Device, UserDevice
 from aqua.serializers import LoginSerializer, UserSerializer, ReadingSerializer, ReadingPostSerializer, \
     UserDeviceSerializer
 from aqua.sms import send_sms
@@ -46,7 +46,7 @@ class DevicesView(APIView):
 
     @staticmethod
     def get(request):
-        return Response({'success': True, 'devices': UserDeviceSerializer(instance=Device.objects.all()).data})
+        return Response({'success': True, 'devices': UserDeviceSerializer(instance=UserDevice.objects.all()).data})
 
 
 class DeviceReadingsView(APIView):
