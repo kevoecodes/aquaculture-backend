@@ -50,3 +50,4 @@ class UserDeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserDevice
         fields = '__all__'
+        depth = 1
