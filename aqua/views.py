@@ -55,11 +55,11 @@ class DeviceReadingsView(APIView):
     def get(self, request):
         device_no = self.request.GET.get('device_no')
         if device_no is not None:
-            readings = Reading.objects.filter(device__device_no=device_no).order_by('-created_at')
+            readings = Reading.objects.filter(device=device_no).order_by('-created_at')
             if readings.count() > 0:
                 return Response({
                     'status': True,
-                    'reading': ReadingSerializer(readings.first(), many=True).data
+                    'reading': ReadingSerializer(readings.first(), many=False).data
                 })
 
             return Response({
