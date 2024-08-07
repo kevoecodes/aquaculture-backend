@@ -46,7 +46,7 @@ class DevicesView(APIView):
 
     @staticmethod
     def get(request):
-        return Response({'success': True, 'devices': UserDeviceSerializer(instance=UserDevice.objects.all()).data})
+        return Response({'success': True, 'devices': UserDeviceSerializer(UserDevice.objects.all(), many=True).data})
 
 
 class DeviceReadingsView(APIView):
