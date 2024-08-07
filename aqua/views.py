@@ -81,6 +81,7 @@ class DeviceReadingsView(APIView):
     @staticmethod
     def post(request):
         serializer = ReadingPostSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             reading = serializer.save()
             PostToReadingChannel(ReadingSerializer(instance=reading).data)
