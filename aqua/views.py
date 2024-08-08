@@ -107,7 +107,16 @@ class GetUserFromTokenView(APIView):
     def get(request):
         return Response({
             'success': True,
-            'user': UserListSerializer(instance=request.user, many=False).data
+            'token': str(Token.objects.get_or_create(user=request.user)[0]),
+            'user': UserSerializer(instance=request.user, many=False).data
         })
 
+
+class SwitchView(APIView):
+
+    @staticmethod
+    def post(request):
+        send_sms('255624351398', request.data['message'])
+
+        return Response({'success': True})
 
