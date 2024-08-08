@@ -26,7 +26,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ReadingPostSerializer(serializers.ModelSerializer):
-    phlevel = serializers.SerializerMethodField()
+    phlevel = serializers.CharField(max_length=255)
 
     class Meta:
         model = Reading
