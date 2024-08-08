@@ -26,10 +26,15 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ReadingPostSerializer(serializers.ModelSerializer):
+    phlevel = serializers.SerializerMethodField()
 
     class Meta:
         model = Reading
-        fields = ('ammonia', 'temperature', 'turbidity', 'dissolved_oxygen', 'device', 'ph')
+        fields = ('ammonia', 'temperature', 'turbidity', 'dissolved_oxygen', 'device', 'phlevel')
+
+    def create(self, validated_data):
+        ph = validated_data.pop('phlevel')
+        return Reading(**validated_data, ph=ph)
 
 
 class ReadingSerializer(serializers.ModelSerializer):

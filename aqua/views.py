@@ -118,7 +118,7 @@ class SwitchView(APIView):
     @staticmethod
     def post(request):
         print(request.data)
-        send_sms('255747659134', request.data['message'])
+        send_sms('255747659134', f"#{request.data['message']}")
 
         return Response({'success': True})
 
