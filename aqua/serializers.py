@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-
 from aqua.models import UserDevice, Reading
 
 
@@ -15,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'last_login', 'device_no']
+        fields = ['username', 'email', 'last_login', 'device_no', 'first_name', 'last_name']
 
     @staticmethod
     def get_device_no(user):

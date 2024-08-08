@@ -113,10 +113,11 @@ class GetUserFromTokenView(APIView):
 
 
 class SwitchView(APIView):
+    permission_classes = [AllowAny]
 
     @staticmethod
     def post(request):
-        send_sms('255624351398', request.data['message'])
+        send_sms('255747659134', request.data['message'])
 
         return Response({'success': True})
 
