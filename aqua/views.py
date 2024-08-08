@@ -100,3 +100,14 @@ class DeviceReadingsView(APIView):
             'status': False,
             'error': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetUserFromTokenView(APIView):
+    @staticmethod
+    def get(request):
+        return Response({
+            'success': True,
+            'user': UserListSerializer(instance=request.user, many=False).data
+        })
+
+
