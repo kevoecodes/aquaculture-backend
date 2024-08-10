@@ -153,7 +153,7 @@ class ListDevicesReadingsView(generics.ListAPIView):
     filter_backends = (filters.SearchFilter,)
     serializer_class = ReadingSerializer
     pagination_class = StandardResultsSetPagination
-    queryset = Reading.objects.all()
+    queryset = Reading.objects.all().order_by('-created_at')
 
 
 
