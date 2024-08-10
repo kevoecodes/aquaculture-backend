@@ -92,7 +92,7 @@ class DeviceReadingsView(APIView):
                 message += f"PH: {reading.ph} - (OP)"
             if len(message) > 0:
                 pass
-                # send_sms('255624351398', message)
+                send_sms('255624351398', message)
             return Response({
                 'status': True,
             })
@@ -118,7 +118,7 @@ class SwitchView(APIView):
     @staticmethod
     def post(request):
         print(request.data)
-        send_sms('255747659134', f"#{request.data['message']}")
+        send_sms('255659787272', f"#{request.data['message']}")
 
         return Response({'success': True})
 
