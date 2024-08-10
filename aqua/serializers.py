@@ -34,7 +34,7 @@ class ReadingPostSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         ph = validated_data.pop('phlevel')
-        return Reading(**validated_data, ph=ph)
+        return Reading.objects.create(**validated_data, ph=ph)
 
 
 class ReadingSerializer(serializers.ModelSerializer):
