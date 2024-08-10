@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
-from rest_framework import status
+from rest_framework import status, generics, filters
 from rest_framework.authtoken.models import Token
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -9,6 +10,12 @@ from aqua.serializers import LoginSerializer, UserSerializer, ReadingSerializer,
     UserDeviceSerializer
 from aqua.sms import send_sms
 from aqua.socket.managers import PostToReadingChannel
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 200
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 
 class LoginView(APIView):
@@ -121,4 +128,32 @@ class SwitchView(APIView):
         send_sms('255659787272', f"#{request.data['message']}")
 
         return Response({'success': True})
+
+
+class ListDevicesView(generics.ListAPIView):
+    search_fields = ['description', 'amount']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class = UserDeviceSerializer
+    pagination_class = StandardResultsSetPagination
+    queryset = UserDevice.objects.all()
+
+
+class DeviceDetailsView(APIView):
+    @staticmethod
+    def get(request, pk):
+        try:
+            device = UserDevice.objects.get(id=pk)
+            return Response({'success': True, 'data': UserDeviceSerializer(instance=device, many=False).data})
+        except UserDevice.DoesNotExist:
+            return Response({'success': False}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ListDevicesReadingsView(generics.ListAPIView):
+    search_fields = ['']
+    filter_backends = (filters.SearchFilter,)
+    serializer_class = ReadingSerializer
+    pagination_class = StandardResultsSetPagination
+    queryset = Reading.objects.all()
+
+
 

@@ -59,7 +59,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-
 ]
 
 ROOT_URLCONF = 'aquaculture_backend.urls'
@@ -148,3 +147,5 @@ CHANNEL_LAYERS = {
 
 SMS_API_KEY = os.environ.get('SMS_API_KEY')
 SMS_SECRET_KEY = os.environ.get('SMS_SECRET_KEY')
+
+CORS_ORIGIN_ALLOW_ALL = True
