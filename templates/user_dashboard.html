@@ -1,0 +1,237 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:49:43 GMT -->
+
+{% include 'head.html' %}
+
+<body class="layout-light side-menu overlayScroll">
+    <div class="mobile-search"></div>
+
+    <div class="mobile-author-actions"></div>
+    {% include 'header.html' %}
+    <main class="main-content">
+
+        {% include 'sidebar.html' %}
+
+        <div class="contents">
+
+            <div class="container-fluid">
+                <div class="profile-content mb-50">
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="breadcrumb-main">
+                                <h4 class="text-capitalize breadcrumb-title">Profile</h4>
+                            </div>
+
+                        </div>
+                        <div class="cos-lg-3 col-md-4  ">
+                            <aside class="profile-sider">
+                                <!-- Profile Acoount -->
+                                <div class="card mb-25">
+                                    <div class="card-body text-center pt-sm-30 pb-sm-0  px-25 pb-0">
+
+                                        <div class="account-profile">
+                                            <div class="ap-img w-100 d-flex justify-content-center">
+                                                <!-- Profile picture image-->
+                                                <img class="ap-img__main rounded-circle mb-3  wh-120 d-flex bg-opacity-primary" src="{% static 'assets/img/student.jpg' %}" alt="profile">
+                                            </div>
+                                            <div class="ap-nameAddress pb-3 pt-1">
+                                                <h5 class="ap-nameAddress__title">{{ user.first_name }} {{ user.last_name }}</h5>
+                                                <p class="ap-nameAddress__subTitle fs-14 m-0">User</p>
+                                                <p class="ap-nameAddress__subTitle fs-14 m-0">
+                                                    <span data-feather="briefcase"></span> {{ user.accountNo }}
+                                                </p>
+                                                <p class="ap-nameAddress__subTitle fs-14 m-0">
+                                                    <span data-feather="map-pin"></span> {{ user.city }}
+                                                </p>
+                                                <p class="ap-nameAddress__subTitle fs-14 m-0">
+                                                    <!-- <span data-feather="map-pin"></span> --> Tariff: {{ user.tariff }}
+                                                </p>
+                                            </div>
+                                          
+                                            <div class="ap-button button-group d-flex justify-content-center flex-wrap">
+                                                <a style="margin-right: 7px;" href="/change-password" class="btn btn-outline-success btn-default btn-squared text-capitalize  px-25"><span data-feather="key"></span>
+                                                        <Datag>Change</Datag>
+                                                </a>
+                                                <a href="/edit-user" class="btn btn-primary btn-default btn-squared text-capitalize  px-25"><span data-feather="user-plus"></span>
+                                                    Edit
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-footer mt-20 pt-20 pb-20 px-0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Profile Acoount End -->
+
+                                <!-- Profile User Bio -->
+                                <div class="card mb-25">
+                                    
+                                    <div class="user-info border-bottom">
+                                        <div class="card-header border-bottom-0 pt-sm-25 pb-sm-0  px-md-25 px-3">
+                                            <div class="profile-header-title">
+                                                Contact info
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-md-1 pt-0">
+                                            <div class="user-content-info">
+                                                <p class="user-content-info__item">
+                                                    <span data-feather="mail"></span>{{ user.email }}
+                                                </p>
+                                                <p class="user-content-info__item">
+                                                    <span data-feather="phone"></span>{{ user.mobileNo }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <!-- Profile User Bio End -->
+                            </aside>
+                        </div>
+
+                        <div class="col">
+                            <!-- Tab Menu -->
+                            <div class="ap-tab ap-tab-header">
+                                <div class="ap-tab-wrapper">
+                                    <ul class="nav px-25 ap-tab-main" id="ap-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="ap-overview-tab" data-toggle="pill" href="#ap-overview" role="tab" aria-controls="ap-overview" aria-selected="true">Overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="activity-tab" data-toggle="pill" href="#activity" role="tab" aria-controls="activity" aria-selected="false">Transactions</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Tab Menu End -->
+                            <div class="tab-content mt-25" id="ap-tabContent">
+                                <div class="tab-pane fade show active" id="ap-overview" role="tabpanel" aria-labelledby="ap-overview-tab">
+                                    <div class="ap-content-wrapper">
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-4 mb-25">
+                                                <!-- Card 2 End  -->
+                                                <div class="ap-po-details radius-xl bg-white d-flex justify-content-between">
+                                                    <div>
+                                                        <div class="overview-content">
+                                                            <h1>TZS {{ account.current_balance }}</h1>
+                                                            <p>Current balance</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ap-po-timeChart">
+                                                        <div class="overview-single__chart d-md-flex align-items-end">
+                                                            <div class="parentContainer">
+                                                                <div>
+                                                                    <canvas id="mychart9"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Card 2 End  -->
+                                            </div>
+                                            <div class="col-lg-4 mb-25">
+                                                <!-- Card 2 End  -->
+                                                <div class="ap-po-details radius-xl bg-white d-flex justify-content-between">
+                                                    <div>
+                                                        <div class="overview-content">
+                                                            <h1>{{ account.consumed_litres }} Liters</h1>
+                                                            <p>Units Consumed</p>  
+                                                        </div>
+                                                        <!-- <a href="/deposit-cash/" id="deposit-cash-link" class="btn btn-outline-success btn-default btn-squared text-capitalize  px-25">
+                                                            <span data-feather="droplet"></span><Datag>Purchace</Datag>
+                                                        </a> -->
+                                                    </div>
+                                                    <div class="ap-po-timeChart">
+                                                        <div class="overview-single__chart d-md-flex align-items-end">
+                                                            <div class="parentContainer">
+                                                                <div>
+                                                                    <canvas id="mychart9"></canvas>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Card 2 End  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="tab-pane fade" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+                                    <div class="ap-post-content">
+                                        <div class="row">
+                                            <div class="col-xxl-8">
+                                                <div class="card mt-25 mb-40">
+                                                    <div class="card-header text-capitalize px-md-25 px-3">
+                                                        <h6>Latest Transactions</h6>
+                                                        <div class="dropdown">
+                                                            <a href="#" role="button" id="products" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                <span data-feather="more-horizontal"></span>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="products">
+                                                                <a class="dropdown-item" href="#">Deposits</a>
+                                                                <a class="dropdown-item" href="#">Purchaces</a>
+                                                                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <!-- Friend post -->
+                                                    <div class="card-body p-0">
+                                                        <div class="ap-product">
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col" style="width: 40%;" >Date </th>
+                                                                            <th scope="col">Type</th>
+                                                                            <th scope="col">Amount </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {% for tran in trans %}
+                                                                        <tr>
+                                                                            <td>{{ tran.at }}</td>
+                                                                            <td>TZS {{ tran.amount }}</td>
+                                                                            <td>{{ tran.type }}</td>
+                                                                        </tr>
+                                                                        {% endfor %}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Friend Post End -->
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+        </div>
+        {% include 'footer.html' %}
+    </main>
+    {% include 'overlayer.html' %}
+    <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script> -->
+    <!-- inject:js-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- endinject-->
+</body>
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/profile.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:50:00 GMT -->
+
+</html>

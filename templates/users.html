@@ -1,0 +1,130 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+{% include 'head.html' %}
+
+<body class="layout-light side-menu overlayScroll">
+    <!-- <div class="mobile-search"></div> -->
+
+    <div class="mobile-author-actions"></div>
+    {% include 'header.html' %}
+    <main class="main-content">
+
+        {% include 'sidebar.html' %}
+
+        <div class="contents">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="breadcrumb-main">
+                            <h4 class="text-capitalize breadcrumb-title">Users</h4>
+                            <div class="breadcrumb-action justify-content-center flex-wrap">                                                        
+                                <div class="action-btn">
+                                    <a href="register-user" class="btn btn-sm btn-primary btn-add">
+                                        <i class="la la-plus"></i> Add New</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="card">
+                            <div class="card-body p-0">
+                                <div class="table4  p-25 bg-white mb-30">
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr class="userDatatable-header">
+                                                    <th>
+                                                        <span class="userDatatable-title">Name</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">Card Number</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">Phone number</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">Tariff</span>
+                                                    </th>
+                                                    <th>
+                                                        <span class="userDatatable-title">Action</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for user in users %}
+
+                                                <tr>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ user.full_name }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ user.cardNo }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ user.mobileNo }}
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="userDatatable-content">
+                                                            {{ user.tariff }}
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="userDatatable-content" style="display: flex;">
+                                                            
+                                                        
+                                                            <a href="user-profile/{{ user.id }}" class="btn btn-outline-success">View</a>
+                                                          
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+
+                                                {% endfor %}
+                                              
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ends: card -->
+
+                </div>
+            </div>
+        </div>
+
+        </div>
+        {% include 'footer.html' %}
+    </main>
+   {% include 'overlayer.html' %}
+
+    <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script> -->
+    <!-- inject:js-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- endinject-->
+</body>
+
+</html>

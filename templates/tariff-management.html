@@ -1,0 +1,87 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+{% include 'head.html' %}
+
+<body class="layout-light side-menu overlayScroll">
+    <div class="mobile-search"></div>
+
+    <div class="mobile-author-actions"></div>
+    {% include 'header.html' %}
+    <main class="main-content">
+
+        {% include 'sidebar.html' %}
+
+        <div class="contents">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="breadcrumb-main">
+                            <h4 class="text-capitalize breadcrumb-title">Change Tariff: {{ tariff }}</h4>                   
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-element">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-default card-md mb-4">
+                                <div class="card-header">
+                                    <h6>Tariff Informations</h6>
+                                    <p> 
+                                        {% for message  in messages %}
+                                            {{message}}
+                                        {% endfor %}    
+                                    </p>
+                                </div>
+                                <div class="card-body pb-md-50">
+                                    <form action="/tariff/{{tariff}}" method="POST">
+                                        {% csrf_token %} 
+                                        <div class="form-row mx-n15">
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center"> Current Price </label>
+                                                <input type="text" name="cost" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" value="{{ price }}"  disabled required>
+                                            </div>
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center"> New Price
+                                                    </label>
+                                                
+                                                    <input type="text" name="tariff" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" value="{{ tariff}}" style="display: none;">
+                                                    
+                                                <input type="number" name="cost" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="200" required>
+                                            </div>
+                                           
+                                        </div>
+
+                                        <button class="btn btn-primary px-30" type="submit">Change</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- ends: .card -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% include 'footer.html' %}
+    </main>
+    {% include 'overlayer.html' %}
+
+    <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script> -->
+    <!-- inject:js-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- endinject-->
+</body>
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/form-validations.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:51:39 GMT -->
+
+</html>

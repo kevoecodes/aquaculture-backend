@@ -1,4 +1,9 @@
-from django.contrib.auth import authenticate
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 from rest_framework import status, generics, filters
 from rest_framework.authtoken.models import Token
 from rest_framework.pagination import PageNumberPagination
@@ -18,7 +23,7 @@ class StandardResultsSetPagination(PageNumberPagination):
     max_page_size = 1000
 
 
-class LoginView(APIView):
+class LoginApiView(APIView):
     permission_classes = [AllowAny]
 
     @staticmethod
@@ -156,4 +161,67 @@ class ListDevicesReadingsView(generics.ListAPIView):
     queryset = Reading.objects.all()
 
 
+# WEB App
+
+def login_request(request):
+    if request.method == "POST":
+        print(request.POST)
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+
+            try:
+                found_user = User.objects.get(username=username)
+                print(found_user)
+            except User.DoesNotExist:
+                messages.error(request, "User does not exist")
+                return redirect('/login')
+
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                print('Authentication successful')
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
+                return redirect("/")
+            else:
+                messages.error(request, "Invalid username or password.")
+                return redirect('/login')
+        else:
+            messages.error(request, "Invalid username or password.")
+            return redirect('/login')
+
+
+class DashboardView(TemplateView):
+    template_name = "index.html"
+    login_url = "login/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['totalUsers'] = User.objects.all().count()  # Get all users count
+        context['totalDevices'] = UserDevice.objects.all().count()  # Get all users count
+
+        readings = Reading.objects.all().order_by('-created_at')
+        readings_data = ReadingSerializer(readings.first(), many=False).data if readings.count() > 0 else {
+           'temperature': 0,
+           'ammonia': 0,
+           'turbidity': 0,
+           'ph': 0,
+           'dissolved_oxygen': 0
+
+        }
+        context['readings'] = readings_data # Get all users count
+
+        return context
+
+
+class ReadingsView(TemplateView):
+    template_name = "readings.html"
+    login_url = "login/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['readings'] = Reading.objects.all()  # Get all objectives
+        return context
 

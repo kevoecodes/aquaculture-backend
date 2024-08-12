@@ -1,7 +1,8 @@
 from django.contrib import admin
+from django.contrib.auth.views import LoginView
 from django.urls import path
-from aqua.views import LoginView, DeviceReadingsView, DevicesView, GetUserFromTokenView, SwitchView, ListDevicesView, \
-    DeviceDetailsView, ListDevicesReadingsView
+from aqua.views import LoginApiView, DeviceReadingsView, DevicesView, GetUserFromTokenView, SwitchView, ListDevicesView, \
+    DeviceDetailsView, ListDevicesReadingsView, login_request, DashboardView, ReadingsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,4 +15,9 @@ urlpatterns = [
     path('api/v1/list-devices', ListDevicesView.as_view()),
     path('api/v1/list-readings', ListDevicesReadingsView.as_view()),
     path('api/v1/device/<str:pk>', DeviceDetailsView.as_view()),
+
+    path('login/', LoginView.as_view(template_name="login.html", next_page="home"), name="login"),
+    path('', DashboardView.as_view(), name="dashboard-view"),
+    path('login/login-page', login_request, name='login-request'),
+    path('readings', ReadingsView.as_view(), name='readings'),
 ]

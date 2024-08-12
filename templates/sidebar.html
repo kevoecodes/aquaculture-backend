@@ -1,0 +1,33 @@
+{% load static %}
+
+
+<aside class="sidebar">
+    <div class="sidebar__menu-group">
+        <ul class="sidebar_nav">
+            <li class="menu-title">
+                <span>Main menu</span>
+            </li>
+            <li class="has-child open">
+                <a href="#" class="active">
+                    <span data-feather="home" class="nav-icon"></span>
+                    <span class="menu-text">Dashboard</span>
+                    <span class="toggle-icon"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a class="active" href="/">Overview</a>
+                    </li>
+                    {%if request.user.is_staff%}
+                    <li>
+                        <a class="" href="/readings">Readings</a>
+                    </li>
+{#                    <li>#}
+{#                        <a class="" href="/generate-report">Report</a>#}
+{#                    </li>#}
+                    {%endif%}
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</aside>

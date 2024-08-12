@@ -1,0 +1,452 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:36:29 GMT -->
+{% include 'head.html' %}
+
+<body class="layout-light side-menu overlayScroll">
+    <div class="mobile-search"></div>
+
+    <div class="mobile-author-actions"></div>
+        {% include 'header.html' %}
+    <main class="main-content">
+
+        {% include 'sidebar.html' %}
+        <div class="contents">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="breadcrumb-main">
+                            <h4 class="text-capitalize breadcrumb-title">Dashboard</h4>
+                            <div class="breadcrumb-action justify-content-center flex-wrap">
+                                <!-- <div class="action-btn">
+                                    <a href="#" class="btn btn-sm btn-primary btn-add">
+                                        <i class="la la-plus"></i> Add New</a>
+                                </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-4 mb-25">
+                                <div class="forcast-cardbox">
+                                    <h6 class="forcast-title">Temperature</h6>
+                                    <div class="forcast-details">
+                                        <h1 class="forcast-value">{{ readings.temperature }} C</h1>
+                                        <p class="forcast-status">
+                                            <span class="percentage color-success">
+                                                <span data-feather="arrow-up"></span>
+                                            <span> 100%</span>
+                                            </span>
+                                            <span class="forcast-text">Since last month</span>
+                                        </p>
+                                    </div>
+                                    <div class="forcast__chart">
+                                        <div class="parentContainer" style="padding: 10px;">
+
+
+                                            <div>
+                                                <canvas id="lineChartforcastOne"></canvas>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ends: .forcast-cardbox -->
+                            </div>
+                            <div class="col-md-4 mb-25">
+                                <div class="forcast-cardbox">
+                                    <h6 class="forcast-title">PH Value</h6>
+                                    <div class="forcast-details">
+                                        <h1 class="forcast-value">{{ readings.ph }}</h1>
+                                        <p class="forcast-status">
+                                            <span class="percentage color-success">
+                                                <span data-feather="arrow-up"></span>
+                                            <span>100%</span>
+                                            </span>
+                                            <span class="forcast-text">Since last month</span>
+                                        </p>
+                                    </div>
+                                    <div class="forcast__chart">
+                                        <div class="parentContainer">
+                                            <div>
+                                                <canvas id="lineChartforcastTwo"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-25">
+                                <div class="forcast-cardbox">
+                                    <h6 class="forcast-title">Turbidity</h6>
+                                    <div class="forcast-details">
+                                        <h1 class="forcast-value">{{ readings.turbidity }}</h1>
+                                        <p class="forcast-status">
+                                            <span class="percentage color-success">
+                                                <span data-feather="arrow-up"></span>
+                                            <span>100%</span>
+                                            </span>
+                                            <span class="forcast-text">Since last month</span>
+                                        </p>
+                                    </div>
+                                    <div class="forcast__chart">
+                                        <div class="parentContainer">
+
+
+                                            <div>
+                                                <canvas id="lineChartforcastTwo"></canvas>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+{#                            <div class="col-md-6 mb-25">#}
+{#                                <div class="ratio-box card">#}
+{#                                    <div class="card-body">#}
+{#                                        <h6 class="ratio-title">Vending Machine 1</h6>#}
+{#                                        <div class="ratio-info d-flex justify-content-between align-items-center">#}
+{#                                            <h1 class="ratio-point">180 Litres</h1>#}
+{#                                            <span class="ratio-percentage color-success"> Online </span>#}
+{#                                        </div>#}
+{#                                        <div class="progress-wrap mb-0">#}
+{#                                            <div class="progress">#}
+{#                                                <div class="progress-bar bg-primary" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>#}
+{##}
+{#                                            </div>#}
+{#                                            <span class="progress-text">#}
+{#                                                <span class="color-dark dark">Location</span>#}
+{#                                            <span class="progress-target">Dar es Salaam</span>#}
+{#                                            </span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <!-- ends: .ratio-box -->#}
+{#                            </div>#}
+{#                            <div class="col-md-6 mb-25">#}
+{#                                <div class="ratio-box card">#}
+{#                                    <div class="card-body">#}
+{#                                        <h6 class="ratio-title">Vending Machine 2</h6>#}
+{#                                        <div class="ratio-info d-flex justify-content-between align-items-center">#}
+{#                                            <h1 class="ratio-point">0 Litres</h1>#}
+{#                                            <span class="ratio-percentage color-danger">Offline</span>#}
+{#                                        </div>#}
+{#                                        <div class="progress-wrap mb-0">#}
+{#                                            <div class="progress">#}
+{#                                                <div class="progress-bar bg-warning" role="progressbar" style="width: 72%;" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>#}
+{#                                            </div>#}
+{#                                            <span class="progress-text">#}
+{#                                                <span class="color-dark dark">Location</span>#}
+{#                                            <span class="progress-target"> Arusha </span>#}
+{#                                            </span>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <!-- ends: .ratio-box -->#}
+{#                            </div>#}
+                        </div>
+                    </div>
+{#                    <div class="col-xxl-6 col-12 mb-25">#}
+                    <div class="col-12 mb-25">
+{##}
+                        <div class="card broder-0">
+                            <div class="card-header">
+                                <h6>
+                                    Readings
+{#                                    <span>Nov 23, 2019 - Nov 29, 2019</span>#}
+                                </h6>
+                                <div class="card-extra">
+{#                                    <ul class="card-tab-links mr-3 nav-tabs nav" role="tablist">#}
+{#                                        <li>#}
+{#                                            <a href="#t_revenue-week" data-toggle="tab" id="t_revenue-week-tab" role="tab" aria-selected="true">Week</a>#}
+{#                                        </li>#}
+{#                                        <li>#}
+{#                                            <a href="#t_revenue-month" data-toggle="tab" id="t_revenue-month-tab" role="tab" aria-selected="false">Month</a>#}
+{#                                        </li>#}
+{#                                        <li>#}
+{#                                            <a class="active" href="#t_revenue-year" data-toggle="tab" id="t_revenue-year-tab" role="tab" aria-selected="false">Year</a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                    <div class="dropdown dropleft">#}
+{#                                        <a href="#" role="button" id="cash" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                            <i class="la la-ellipsis-h"></i>#}
+{#                                        </a>#}
+{#                                        <div class="dropdown-menu" aria-labelledby="cash">#}
+{#                                            <a class="dropdown-item" href="#">Action</a>#}
+{#                                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+                                </div>
+                            </div>
+                            <!-- ends: .card-header -->
+                            <div class="card-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade" id="t_revenue-week" role="tabpanel" aria-labelledby="t_revenue-week-tab">
+{#                                        <div class="cashflow-display d-flex">#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Current Balance</span>#}
+{#                                                <h2 class="cashflow-display__amount color-primary">$2,784</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash in</span>#}
+{#                                                <h2 class="cashflow-display__amount">TZS {{ totalDeposits }}</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash out</span>#}
+{#                                                <h2 class="cashflow-display__amount">$2,470</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                        </div>#}
+
+                                        <div class="cashflow-chart">
+                                            <div class="parentContainer">
+
+
+                                                <div>
+                                                    <canvas id="barChartCashflow_W"></canvas>
+                                                </div>
+
+
+                                            </div>
+                                            <ul class="legend-static">
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(95, 99, 242);"></span>Cash in
+                                                </li>
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(255, 77, 79);"></span>Cash out
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="t_revenue-month" role="tabpanel" aria-labelledby="t_revenue-month-tab">
+{#                                        <div class="cashflow-display d-flex">#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Current Balance</span>#}
+{#                                                <h2 class="cashflow-display__amount color-primary">$52,784</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash in</span>#}
+{#                                                <h2 class="cashflow-display__amount">$74,240</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash out</span>#}
+{#                                                <h2 class="cashflow-display__amount">$22,470</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                        </div>#}
+
+                                        <div class="cashflow-chart">
+                                            <div class="parentContainer">
+
+
+                                                <div>
+                                                    <canvas id="barChartCashflow_M"></canvas>
+                                                </div>
+
+
+                                            </div>
+                                            <ul class="legend-static">
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(95, 99, 242);"></span>Ph Value
+                                                </li>
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(255, 77, 79);"></span>Temperature
+                                                </li>
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(255, 77, 79);"></span>Turbidity
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade active show" id="t_revenue-year" role="tabpanel" aria-labelledby="t_revenue-year-tab">
+{#                                        <div class="cashflow-display d-flex">#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Current Balance</span>#}
+{#                                                <h2 class="cashflow-display__amount color-primary">TZS {{ totalDeposits }}</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash in</span>#}
+{#                                                <h2 class="cashflow-display__amount">TZS {{ totalDeposits }}</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                            <div class="cashflow-display__single">#}
+{#                                                <span class="cashflow-display__title">Cash out</span>#}
+{#                                                <h2 class="cashflow-display__amount">TZS 0</h2>#}
+{#                                            </div>#}
+{#                                            <!-- ends: .cashflow-display__single -->#}
+{#                                        </div>#}
+
+                                        <div class="cashflow-chart">
+                                            <div class="parentContainer">
+
+
+                                                <div>
+                                                    <canvas id="barChartCashflow"></canvas>
+                                                </div>
+
+
+                                            </div>
+                                            <ul class="legend-static">
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(95, 99, 242);"></span>Ph Value
+                                                </li>
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(255, 77, 79);"></span>Temperature
+                                                </li>
+                                                <li class="custom-label">
+                                                    <span style="background-color: rgb(255, 77, 79);"></span>Turbidity
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ends: .card-body -->
+                        </div>
+
+                    </div>
+{#                   #}
+{#                    <div class="col-md-6 mb-25">#}
+{##}
+{#                        <div class="card broder-0">#}
+{#                            <div class="card-header">#}
+{#                                <h6>GREEN TARIFF</h6>#}
+{#                                <p> Cost: {{ green.cost }} </p>#}
+{#                                <div class="card-extra">#}
+{#                                    <div class="dropdown dropleft">#}
+{#                                        <a href="#" role="button" id="receivable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                            <span data-feather="more-horizontal"></span>#}
+{#                                        </a>#}
+{#                                        <div class="dropdown-menu" aria-labelledby="receivable">#}
+{#                                            <a class="dropdown-item" href="#">Action</a>#}
+{#                                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- ends: .card-header -->#}
+{#                            <div class="card-body">#}
+{#                                <div class="account-chart">#}
+{##}
+{##}
+{#                                    <div>#}
+{#                                        <canvas id="lineChartAccountReceive"></canvas>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="action-btn"  style="text-align: right;">#}
+{#                                <a href="/tariff/GREEN"  class="btn btn-sm btn-primary">#}
+{#                                    Change Tariff#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <!-- ends: .card-body -->#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+{#                    <div class="col-md-6 mb-25">#}
+{##}
+{#                        <div class="card broder-0">#}
+{#                            <div class="card-header">#}
+{#                                <h6>SILVER TARIFF</h6>#}
+{##}
+{#                                <p>Cost: {{ silver.cost }}</p>#}
+{#                                <div class="card-extra">#}
+{#                                    <div class="dropdown dropleft">#}
+{#                                        <a href="#" role="button" id="payable" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                            <span data-feather="more-horizontal"></span>#}
+{#                                        </a>#}
+{#                                        <div class="dropdown-menu" aria-labelledby="payable">#}
+{#                                            <a class="dropdown-item" href="#">Action</a>#}
+{#                                            <a class="dropdown-item" href="#">Another action</a>#}
+{#                                            <a class="dropdown-item" href="#">Something else here</a>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- ends: .card-header -->#}
+{#                            <div class="card-body">#}
+{#                                <div class="account-chart">#}
+{##}
+{##}
+{#                                    <div>#}
+{#                                        <canvas id="lineChartAccountPayable"></canvas>#}
+{#                                    </div>#}
+{##}
+{##}
+{#                                </div>#}
+{#                               #}
+{#                            </div>#}
+{#                            <div class="action-btn"  style="text-align: right;">#}
+{#                                <a href="tariff/SILVER"  class="btn btn-sm btn-primary">#}
+{#                                    Change Tariff#}
+{#                                </a>#}
+{#                            </div>#}
+{#                            <!-- ends: .card-body -->#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+                </div>
+            </div>
+
+        </div>
+        {% include 'footer.html' %}
+    </main>
+    {% include 'overlayer.html' %}
+
+    <!-- <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script> -->
+    <!-- inject:js-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- endinject-->
+
+    <script>
+        console.log("The Users", "{{ totalUsers }}")
+        chartjsLineChartForcast(
+            "#lineChartforcastOne",
+            label="Line Chart dataset",
+            startGradient="#5F63F212",
+            endGradient="#5F63F202",
+            bColor="#5F63F2",
+            data=[0,0,0,0,0,0,parseInt("{{ totalUsers }}"),]);
+
+       {#chartjsBarChartCashflow(#}
+       {#    "barChartCashflow",#}
+       {#    data=[20,60,50,45,50,60,70,40,45,35,25,30],#}
+       {#    data=[10,40,30,40,60,55,45,35,30,20,15,20],#}
+       {#    labels=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"])#}
+       {# #}
+        chartjsLineChartForcast(
+            "#lineChartforcastTwo",
+            label="Line Chart dataset",
+            startGradient="#20C99712",
+            endGradient="#20C99703",
+            bColor="#20C997",
+            data=[0,0,0,0,0,0,parseFloat("{{ totalConsumedLitres }}")]);
+
+        {#$("#t_revenue-week-tab").on("shown.bs.tab",(function(){chartjsBarChartCashflow("barChartCashflow_W",data=[20,60,50,45,50,60,70,40,45,35,25,30],data=[10,40,30,40,60,55,45,35,30,20,15,20],labels=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]),$("#t_revenue-week-tab").off()})),$("#t_revenue-month-tab").on("shown.bs.tab",(function(){chartjsBarChartCashflow("barChartCashflow_M",data=[20,60,50,45,50,60,70,40,45,35,25,30],data=[10,40,30,40,60,55,45,35,30,20,15,20],labels=["1-5","6-10","11-15","16-20","21-25","26-30"]),$("#t_revenue-month-tab").off()})),chartjsBarChartCashflow("barChartCashflow",data=[20,60,50,45,50,60,70,40,45,35,25,30],data=[31,40,30,40,60,55,45,35,30,20,15,20],data=[10,40,30,40,60,55,45,35,30,20,15,20],labels=["","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","13HRS","14HRS","15HRS"])#}
+    </script>
+</body>
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:41:21 GMT -->
+
+</html>

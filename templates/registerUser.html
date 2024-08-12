@@ -1,0 +1,124 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en" dir="ltr">
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/form-validations.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:51:39 GMT -->
+
+{% include 'head.html' %}
+
+<body class="layout-light side-menu overlayScroll">
+    <div class="mobile-search"></div>
+
+    <div class="mobile-author-actions"></div>
+    {% include 'header.html' %}
+    <main class="main-content">
+
+        {% include 'sidebar.html' %}
+
+        <div class="contents">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                       
+
+                    </div>
+                </div>
+                <div class="form-element">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-default card-md mb-4">
+                                <div class="card-header">
+                                    <h6>Add User Information</h6>
+                                    <p> 
+                                        {% for message  in messages %}
+                                            {{message}}
+                                        {% endfor %}    
+                                    </p>
+                                </div>
+                                <div class="card-body pb-md-50">
+                                    <form action="{%if edit_mode == True and request.user.is_staff%}/edit-user/{{id}}{%elif edit_mode == True and not request.user.is_staff%}/edit-user{%else%}/register-user{%endif%}" method="POST">
+                                        {% csrf_token %} 
+                                        <input type="text" name="prev_mobileNo" style="display: none;" value="{{the_user.mobileNo}}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01">
+                                        <div class="form-row mx-n15">
+                                            <div class="col-md-4 mb-20 px-15">
+                                                <label for="validationDefault01" class="il-gray fs-14 fw-500 align-center">First
+                                                    name</label>
+                                                <input type="text" name="first_name" value="{{the_user.first_name}}" class="form-control ih-medium ip-light radius-xs b-light" id="validationDefault01" placeholder="Mark" required>
+                                            </div>
+                                            <div class="col-md-4 mb-20 px-15">
+                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">Last
+                                                    name</label>
+                                                <input type="text" name="last_name" value="{{the_user.last_name}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="Clayton" required>
+                                            </div>
+                                            <div class="col-md-4 mb-20 px-15">
+                                                <label for="validationDefault012" class="il-gray fs-14 fw-500 align-center">Email</label>
+                                                <input type="text" name="email" value="{{the_user.email}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault012" placeholder="user@example.com" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row mx-n15">
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault02" class="il-gray fs-14 fw-500 align-center">Phone
+                                                    number</label>
+                                                <input type="text" name="mobileNo" value="{{the_user.mobileNo}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault02" placeholder="01233214" required>
+                                            </div>
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault012" class="il-gray fs-14 fw-500 align-center">NIDA Number</label>
+                                                <input name="nidaNo" type="text" value="{{the_user.nidaNo}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault012" placeholder="0123456789" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-row mx-n15">
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault03" class="il-gray fs-14 fw-500 align-center">Tariff</label>
+                                                <select name="tariff" class="form-control  ih-medium ip-light radius-xs b-light" id="">
+                                                    {%for tariff in tariffs%}
+                                                    <option value="{{tariff.tariff}}"> {{tariff.tariff}} </option>
+                                                    {%endfor%}
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault03" class="il-gray fs-14 fw-500 align-center">City</label>
+                                                <input type="text" name="city" value="{{the_user.city}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault03" placeholder="City" required>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="form-row mx-n15">
+                                            <div class="col-md-6 mb-20 px-15">
+                                                <label for="validationDefault03" class="il-gray fs-14 fw-500 align-center">Card Number</label>
+                                                <input type="text" name="cardNo" value="{{the_user.cardNo}}" class="form-control  ih-medium ip-light radius-xs b-light" id="validationDefault03" placeholder="..." required>
+                                            </div>
+                                            
+                                        </div>
+                                  
+                                        <button class="btn btn-primary px-30" type="submit">Submit Form</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- ends: .card -->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        {% include 'footer.html' %}
+    </main>
+    {% include 'overlayer.html' %}
+
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDduF2tLXicDEPDMAtC6-NLOekX0A5vlnY"></script>
+    <!-- inject:js-->
+    <script src="{% static 'assets/js/plugins.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.min.js' %}"></script>
+    <!-- endinject-->
+</body>
+
+
+<!-- Mirrored from demo.jsnorm.com/html/strikingdash/strikingdash/ltr/form-validations.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 04 Mar 2022 08:51:39 GMT -->
+
+</html>
