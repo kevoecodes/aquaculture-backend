@@ -44,7 +44,6 @@ class Reading(models.Model):
 
         # Write data rows
         for row_num, record in enumerate(queryset, 2):
-            print(row_num, record)
             for col_num, column_title in enumerate(columns, 1):
                 column_letter = get_column_letter(col_num)
                 worksheet[f'{column_letter}{row_num}'] = getattr(record, column_title)
