@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
@@ -211,7 +211,7 @@ class DashboardView(TemplateView):
            'dissolved_oxygen': 0
 
         }
-        context['readings'] = readings_data # Get all users count
+        context['readings'] = readings_data  # Get all users count
 
         return context
 
@@ -225,3 +225,7 @@ class ReadingsView(TemplateView):
         context['readings'] = Reading.objects.all()  # Get all objectives
         return context
 
+
+def logout_user(request):
+    logout(request)
+    return redirect('/login')

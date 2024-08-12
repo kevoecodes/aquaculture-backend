@@ -7,10 +7,10 @@
                 <img class="svg" src="{% static 'assets/img/svg/bars.svg' %}" alt="img"></a>
             <a class="navbar-brand" href="#">
                 {%if request.user.is_staff%}
-                Water Vending System - Admin
+                Smart Aquaculture - Admin
                 {%endif%}
                 {%if not request.user.is_staff%}
-                Water Vending System - User
+                Smart Aquaculture - User
                 {%endif%}
             </a>
             {%if request.user.is_staff%}
