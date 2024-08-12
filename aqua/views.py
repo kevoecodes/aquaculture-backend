@@ -229,3 +229,11 @@ class ReadingsView(TemplateView):
 def logout_user(request):
     logout(request)
     return redirect('/login')
+
+
+def export_excel_data(request):
+    # Fetch the data you want to export
+    columns = ['temperature', 'turbidity', 'ph']  # Replace with your model fields
+
+    # Generate and return the Excel file
+    return Reading.export_data_to_excel(columns, filename='Readings.xlsx')

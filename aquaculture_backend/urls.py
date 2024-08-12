@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from django.urls import path
 from aqua.views import LoginApiView, DeviceReadingsView, DevicesView, GetUserFromTokenView, SwitchView, ListDevicesView, \
-    DeviceDetailsView, ListDevicesReadingsView, login_request, DashboardView, ReadingsView, logout_user
+    DeviceDetailsView, ListDevicesReadingsView, login_request, DashboardView, ReadingsView, logout_user, \
+    export_excel_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -21,4 +22,5 @@ urlpatterns = [
     path('login/login-page', login_request, name='login-request'),
     path('readings', ReadingsView.as_view(), name='readings'),
     path('logout', logout_user, name='logout'),
+    path('export-excel', export_excel_data, name='export-excel'),
 ]

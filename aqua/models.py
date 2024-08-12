@@ -1,5 +1,8 @@
+import openpyxl
 from django.contrib.auth.models import User
 from django.db import models
+from django.http import HttpResponse
+from openpyxl.utils import get_column_letter
 
 
 class Device(models.Model):
@@ -21,6 +24,39 @@ class Reading(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+
+    import openpyxl
+    from openpyxl.utils import get_column_letter
+    from django.http import HttpResponse
+
+    @staticmethod
+    def export_data_to_excel(columns, filename='export.xlsx'):
+        queryset = Reading.objects.all()
+        # Create a workbook and select the active worksheet
+        workbook = openpyxl.Workbook()
+        worksheet = workbook.active
+        worksheet.title = 'Exported Data'
+
+        # Write the header row
+        for col_num, column_title in enumerate(columns, 1):
+            column_letter = get_column_letter(col_num)
+            worksheet[f'{column_letter}1'] = column_title
+
+        # Write data rows
+        for row_num, record in enumerate(queryset, 2):
+            print(row_num, record)
+            for col_num, column_title in enumerate(columns, 1):
+                column_letter = get_column_letter(col_num)
+                worksheet[f'{column_letter}{row_num}'] = getattr(record, column_title)
+
+        # Set the response for the download
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = f'attachment; filename={filename}'
+
+        # Save the workbook to the response
+        workbook.save(response)
+
+        return response
 
 
 class UserDevice(models.Model):
