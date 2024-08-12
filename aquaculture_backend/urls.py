@@ -7,7 +7,7 @@ from aqua.views import LoginApiView, DeviceReadingsView, DevicesView, GetUserFro
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/auth/login', LoginView.as_view()),
+    path('api/auth/login', LoginApiView.as_view()),
     path('api/v1/device-info', DeviceReadingsView.as_view()),
     path('api/v1/devices', DevicesView.as_view()),
     path('api/v1/auth/user-from-token', GetUserFromTokenView.as_view()),
